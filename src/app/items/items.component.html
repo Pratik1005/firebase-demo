@@ -1,5 +1,11 @@
-<ul>
-  <li *ngFor="let item of items">
-    {{item?.title}}
-  </li>
-</ul>
+<div *ngIf="items?.length > 0; else noItems">
+  <ul>
+    <li *ngFor="let item of items">
+      {{item?.title}}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+  <h3>No Items!</h3>
+</ng-template>
