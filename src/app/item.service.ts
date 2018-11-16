@@ -12,10 +12,12 @@ import { map } from 'rxjs/operators';
 export class ItemService {
 
   itemsCollection: AngularFirestoreCollection<Item>;
+  itemDocument: AngularFirestoreDocument<Item>;
   items: Observable<Item[]>
 
   constructor(private afs: AngularFirestore) {
-    this.items = this.afs.collection('items').snapshotChanges().pipe(
+    this.itemsCollection = this.afs.collection('items', ref => ref.orderBy('title', 'asc'));
+    this.items = this.itemsCollection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as Item
@@ -28,5 +30,14 @@ export class ItemService {
 
   getItems() {
     return this.items;
+  }
+
+  addItem(item: Item) {
+    this.itemsCollection.add(item);
+  }
+
+  deleteItem(item: Item) {
+    this.itemDocument = this.afs.doc(`items/${item.id}`);
+    this.itemDocument.delete();
   }
 }

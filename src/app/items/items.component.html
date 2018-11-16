@@ -1,7 +1,12 @@
-<div *ngIf="items?.length > 0; else noItems">
-  <ul>
-    <li *ngFor="let item of items">
-      {{item?.title}}
+<div *ngIf="items?.length > 0; else noItems" class="main">
+  <h2>Items: </h2>
+  <ul class="list-group">
+    <li *ngFor="let item of items" class="list-group-item">
+      <div>
+        <strong>{{item?.title | uppercase}}: </strong>
+        <span>{{item?.description}}</span>
+        <span class="btn btn-danger btn-sm" (click)="deleteItem(item)">Delete</span>
+      </div>
     </li>
   </ul>
 </div>
