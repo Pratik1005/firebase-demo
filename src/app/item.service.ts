@@ -36,6 +36,11 @@ export class ItemService {
     this.itemsCollection.add(item);
   }
 
+  updateItem(item: Item) {
+    this.itemDocument = this.afs.doc(`items/${item.id}`);
+    this.itemDocument.update(item);
+  }
+
   deleteItem(item: Item) {
     this.itemDocument = this.afs.doc(`items/${item.id}`);
     this.itemDocument.delete();
