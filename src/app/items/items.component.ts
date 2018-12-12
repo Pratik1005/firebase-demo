@@ -10,14 +10,14 @@ import { Item } from '../item';
 export class ItemsComponent implements OnInit {
   items: Item[];
   itemToEdit: Item;
-  editState: boolean = false;
+  editState = false;
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
     this.itemService.getItems().subscribe(items => {
       this.items = items;
-    })
+    });
   }
 
   deleteItem(item) {

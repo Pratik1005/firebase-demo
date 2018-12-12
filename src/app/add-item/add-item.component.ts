@@ -11,7 +11,7 @@ export class AddItemComponent implements OnInit {
   item: Item = {
     title: '',
     description: ''
-  }
+  };
 
   constructor(private itemService: ItemService) { }
 
